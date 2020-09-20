@@ -10,6 +10,7 @@ public class Schema {
         this.flagsSchema = flagsSchema;
     }
 
+    //获得schema中的类型
     public Object getValueOf(String flag){
         return flagsSchema.stream()
                 .filter(flagSchema -> flagSchema.equalsWith(flag))

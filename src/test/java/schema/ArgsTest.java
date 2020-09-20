@@ -37,4 +37,10 @@ public class ArgsTest {
         Assert.assertEquals("8080",keyValueString.get(1).getValue());
         Assert.assertEquals("/usr/logs",keyValueString.get(2).getValue());
     }
+
+    @Test
+    public void should_return_boolean_true_given_l(){
+        Args args1 = new Args("l true",schema);
+        Assert.assertEquals(true,args1.getValueOf("l"));
+    }
 }

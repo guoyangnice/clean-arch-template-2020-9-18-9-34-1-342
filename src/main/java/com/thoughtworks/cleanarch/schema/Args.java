@@ -28,11 +28,9 @@ public class Args {
 
     public Object getValueOf(String flag){
         argsPairs = new Args(argsText,schema).scan();
-        for(int i = 0;i < argsPairs.size();i++){
-            for(int j = 0; j < schema.flagsSchema.size();j++){
-                if(flag.equals(schema.flagsSchema.toArray()[i])){
-                    return argsPairs.get(i).parseValue();
-                }
+        for(int i = 0; i < argsPairs.size();i++){
+            if(argsPairs.get(i).getFlag().equals(flag)){
+                return argsPairs.get(i).parseValue(flag);
             }
         }
         return null;

@@ -14,7 +14,7 @@ public class Arg {
         return flag;
     }
 
-    public Object parseValue(){
+    public Object parseValue(String flag){
         switch(flag){
             case "l":
                 return Boolean.parseBoolean(value);
