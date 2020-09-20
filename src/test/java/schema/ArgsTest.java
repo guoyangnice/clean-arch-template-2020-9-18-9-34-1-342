@@ -51,7 +51,6 @@ public class ArgsTest {
         Assert.assertEquals(8080,args1.getValueOf("p"));
     }
 
-    //默认值
     @Test
     public void should_return_boolean_false_true_given_l() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Args args1 = new Args("l ",schema);

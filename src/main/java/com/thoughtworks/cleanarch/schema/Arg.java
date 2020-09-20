@@ -19,7 +19,7 @@ public class Arg {
     public Object parseValue(String flag) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         ValueTypeFactory valueTypeFactory = new ValueType();
         if(flag.equals("l")){
-            Type booleanType = (Type) valueTypeFactory.createValueType(BooleanType.class);
+            Type booleanType = valueTypeFactory.createValueType(BooleanType.class);
             return booleanType.getType(value);
         }
         if(flag.equals("p")){

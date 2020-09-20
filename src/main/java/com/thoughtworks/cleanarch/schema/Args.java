@@ -28,11 +28,11 @@ public class Args {
                     value = new FlagsSchema().getDefaultValue(key).toString();
                 }
                 Arg arg = new Arg(key,value);
+                checkFlag(keyValuePairs,arg);
                 keyValuePairs.add(arg);
             }catch(Exception e){
                 e.printStackTrace();
             }
-
         }
         return keyValuePairs;
     }
@@ -45,5 +45,13 @@ public class Args {
             }
         }
         return null;
+    }
+
+    public void checkFlag(List<Arg> argsPairs,Arg arg) throws Exception {
+        for(Arg arg1 : argsPairs){
+            if(arg.getFlag().equals(arg1.getFlag())){
+                throw new Exception("输入的Flag重复");
+            }
+        }
     }
 }
