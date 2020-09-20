@@ -9,11 +9,19 @@ public class FlagsSchema {
         this.valueType = valueType;
     }
 
+    public String getFlag(){
+        return flag;
+    }
+
     public Object getType(){
         return valueType;
     }
 
     public boolean equalsWith(String flag){
         return flag.equals(this.flag);
+    }
+
+    public Object getDeafaultValue(){
+        return null;
     }
 }
