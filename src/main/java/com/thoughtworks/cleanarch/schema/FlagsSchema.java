@@ -4,6 +4,10 @@ public class FlagsSchema {
     private String flag;
     private Object valueType;
 
+    public FlagsSchema(){
+
+    }
+
     public FlagsSchema(String flag,Object valueType){
         this.flag = flag;
         this.valueType = valueType;
@@ -21,7 +25,7 @@ public class FlagsSchema {
         return flag.equals(this.flag);
     }
 
-    public Object getDefaultValue(){
+    public Object getDefaultValue(String flag){
         switch(flag){
             case "l":
                 return String.valueOf(false);

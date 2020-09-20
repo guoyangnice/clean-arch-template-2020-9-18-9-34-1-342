@@ -1,5 +1,6 @@
 package com.thoughtworks.cleanarch.schema;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -18,15 +19,25 @@ public class Args {
         keyValueStringList = keyValueStringList.stream().map(String::trim).collect(Collectors.toList());
         List<Arg> keyValuePairs = new ArrayList<>();
         for(String kv : keyValueStringList){
-            String key = kv.split(" ")[0];
-            String value = kv.split(" ")[1];
-            Arg arg = new Arg(key,value);
-            keyValuePairs.add(arg);
+            try{
+                String key = kv.split(" ")[0];
+                String value = "";
+                if(kv.split(" ").length > 1){
+                    value = kv.split(" ")[1];
+                }else{
+                    value = new FlagsSchema().getDefaultValue(key).toString();
+                }
+                Arg arg = new Arg(key,value);
+                keyValuePairs.add(arg);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
         }
         return keyValuePairs;
     }
 
-    public Object getValueOf(String flag){
+    public Object getValueOf(String flag) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         argsPairs = new Args(argsText,schema).scan();
         for(int i = 0; i < argsPairs.size();i++){
             if(argsPairs.get(i).getFlag().equals(flag)){

@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,8 +40,21 @@ public class ArgsTest {
     }
 
     @Test
-    public void should_return_boolean_true_given_l(){
+    public void should_return_boolean_true_given_l() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Args args1 = new Args("l true",schema);
         Assert.assertEquals(true,args1.getValueOf("l"));
+    }
+
+    @Test
+    public void should_return_boolean_integer_true_given_l_d() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        Args args1 = new Args("l true -p 8080",schema);
+        Assert.assertEquals(8080,args1.getValueOf("p"));
+    }
+
+    //默认值
+    @Test
+    public void should_return_boolean_false_true_given_l() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        Args args1 = new Args("l ",schema);
+        Assert.assertEquals(false,args1.getValueOf("l"));
     }
 }

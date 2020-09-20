@@ -1,5 +1,7 @@
 package com.thoughtworks.cleanarch.schema;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class Arg {
     private String flag;
     private String value;
@@ -14,23 +16,18 @@ public class Arg {
         return flag;
     }
 
-    public Object parseValue(String flag){
-        switch(flag){
-            case "l":
-                return Boolean.parseBoolean(value);
-            case "p":
-                return Integer.parseInt(value);
-            case "d":
-                return String.valueOf(value);
-            default:
-                return null;
+    public Object parseValue(String flag) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        ValueTypeFactory valueTypeFactory = new ValueType();
+        if(flag.equals("l")){
+            Type booleanType = (Type) valueTypeFactory.createValueType(BooleanType.class);
+            return booleanType.getType(value);
         }
+        if(flag.equals("p")){
+            Type integerType = valueTypeFactory.createValueType(IntegerType.class);
+            return integerType.getType(value);
+        }
+        return value;
     }
-
-    public boolean withFlag(){
-        return false;
-    }
-
 
     public String getValue() {
         return value;
